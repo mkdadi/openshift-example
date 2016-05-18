@@ -46,7 +46,7 @@ else:
     DATABASES = {
         'default':{
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR,'db.sqlite3'),
+            'NAME': 'db.sqlite3',
             'USER': '',#os.getenv('OPENSHIFT_SQLITE_DB_USERNAME'),
             'PASSWORD': '',#os.getenv('OPENSHIFT_SQLITE_DB_PASSWORD'),
             'HOST': '',#os.getenv('OPENSHIFT_SQLITE_DB_HOST'),
