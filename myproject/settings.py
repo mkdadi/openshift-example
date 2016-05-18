@@ -28,7 +28,7 @@ SESSION_COOKIE_AGE = 5 * 60 #
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if ON_OPENSHIFT:
-    DEBUG = False
+    DEBUG = True
     ALLOWED_HOSTS = ['*']
     DATABASES = {
         'default':{
@@ -58,6 +58,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'APP_DIRS': True,
+        'DIRS' : [os.path.join(BASE_DIR,'kaizing/templates'),],
         'OPTIONS': {
             'debug': False,
             'context_processors': [
@@ -74,8 +75,6 @@ TEMPLATES = [
         },
     },
 ]
-
-TEMPLATE_DIRS = ['kaizing/templates/',]
 
 # Application definition
 
@@ -137,8 +136,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'wsgi', 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'wsgi', 'static', 'media')
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'kaizing', 'static'),)
-TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'kaizing', 'templates'),)
