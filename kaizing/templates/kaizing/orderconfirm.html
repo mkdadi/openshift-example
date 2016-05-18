@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <title>Kaizing</title>
+</head>
+<body>
+    <div class="row">
+        <div class="col s6 offset-s3">
+            <div class="card-panel cyan darken-3">
+              <span class="white-text">
+                Your order is <i style="color: blue;"> placed</i>.<br/>
+                Your order id is {{id}}<br/>
+                To track your order click <a href="/kaizing/orderstatus/">here</a>.<br/>
+                Thank you for using <a href="/" style="text-decoration: none;color: orange;">KAIZING</a> services.
+                <h5 style="text-align: center;color: orange;">Thank you.</h5>
+              </span>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    sessionStorage.clear()
+</script>
+</html>

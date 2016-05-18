@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>
+        {% block title %}Manager Dashboard{% endblock %}
+    </title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+
+    <!-- Base CSS Files -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'kaizing/css/bizmanager.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'kaizing/css/jquery.dataTables.min.css' %}" />
+    <script type="text/javascript" src="/static/kaizing/js/admin-base.js" ></script>
+    <script type="text/javascript" src="/static/kaizing/js/bootstrap.min.js" ></script>
+    <script type="text/javascript" src="/static/kaizing/js/jquery-1.12.2.js" ></script>
+    <!-- Font -->
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600, 700,900' rel='stylesheet' type='text/css'>
+
+    {% block page_css %}
+    {%  endblock %}
+
+
+    {%  block page_top_js %}
+    {%  endblock %}
+
+    <style>
+        .logo:hover {
+            background: none !important;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        {% if biz %}
+            {% url bizmanager_dashboard_overview biz.biz_id as home_url %}
+        {% else %}
+            {% url bizmanager_home as home_url %}
+        {% endif %}
+        <a href="{{ home_url }}" class="logo">
+            <span style="font-family: 'source sans pro'; text-transform: uppercase;
+            font-size: 20px; position: relative; top: -5px; line-height: 1em"><span class="p1">Kai</span><span class="p2">zing</span></span>
+        </a>
+
+        <nav class="navbar" role="navigation">
+            <a href="#" class="sidebar-toggle" data-toggle='offcanvas'>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="glyphicon glyphicon-menu-hamburger"></span>
+            </a>
+            <div style="float: right; padding: 10px; margin-right: 5px; position: relative; top: 5px;">
+                {% block nav_right_block %}
+                    {% if vendor.is_authenticated %}
+                        <span style="color: #fff; font-size: 1em; margin-right: 3px;">
+                            <i class="fa fa-user"></i>
+                            Logout
+                        </span>
+                        <span style="position: relative; top: 1px;">
+                            <a href="{% url 'kaizing:vendorlogout' vendor.pk %}" style="font-size: 1em; color: #fff">
+                                <i title="Logout" class="glyphicon glyphicon-log-out"></i>
+                            </a>
+                        </span>
+                    {% endif %}
+                {% endblock %}
+            </div>
+        </nav>
+    </header>
+
+    <div class="wrapper row-offcanvas row-offcanvas-left">
+        <aside class="left-side sidebar-offcanvas" style="min-height: 245%; border-right: #b6b6b6; box-shadow: 1px 0 1px #d2d2d2">
+            <section class="sidebar">
+                {% if vendor.is_authenticated %}
+                    <div class="company-info pad">
+                        <span class="ellipsis" style="margin-top: 10px; text-transform: uppercase; font-weight: 900">
+                            {{vendor.name}}</span>
+                    </div>
+                {% endif %}
+
+                {% block sidebar_menu %}
+                    {# {% include 'kaizing/sidebar_nav.html' %} #}
+                {% endblock %}
+
+            </section>
+        </aside>
+
+        <aside class="right-side">
+            <section class="content pad">
+                {% block messages %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-info" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                {% endblock %}
+                {% block content %}
+                {% endblock %}
+            </section>
+        </aside>
+    </div>
+
+    {% block page_bottom_js %}
+    {% endblock %}
+
+</body>
+</html>

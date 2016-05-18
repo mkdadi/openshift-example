@@ -1,0 +1,606 @@
+body{
+	font-family: 'Josefin sans', sans-serif!important;
+	margin:0;
+	padding: 0;
+}
+h1, h2, h3, h4{font-family: 'Josefin sans', sans-serif!important;line-height: normal;}
+header{
+  height: 15px; 
+  background-color:black;
+  padding-top:10px;
+  padding-bottom:50px;
+  border-radius:50px; 
+   }
+header .content, section .content{width: 960px;margin: 0 auto;}
+header .content .logo,header .content .header-menu{display: inline-block;}
+/*header .content .logo{width: 275px;}*/
+header .content .logo a,header .content .header-menu{
+	height: 150px;
+	line-height: 150px;
+}
+header .content .logo img{vertical-align: middle;}
+.passwordClass{font-size: 10px!important;letter-spacing: 3px}
+
+.login-a {
+    background-color: white;
+    border: 1px solid #66bb6a;
+    border-radius: 10px;
+    color: #666666;
+    display: inline-block;
+    font-family: "Varela Round", "sans-serif"!important;
+    font-size: 14px;
+    font-weight: 700;
+    height: 40px;
+    line-height: 38px;
+    margin: 0 10px;
+    text-align: center;
+    text-decoration: none;
+    width: 130px;
+}
+.login-inner{
+  background-color: #66bb6a;
+    border: 1px solid #66bb6a;
+    border-radius: 10px;
+    color: white;
+    display: inline-block;
+    font-family: "Varela Round", "sans-serif"!important;
+    font-size: 14px;
+    font-weight: 700;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    text-decoration: none;
+    width: 100px;
+}
+.login-inner:hover{
+  background-color: #4d994f;
+  color:white!important;
+}
+.cancel{color: #ef5350;
+    font-family: "Varela Round", "sans-serif"!important;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 10px;}
+.login-a:hover{color:white;background-color:#66bb6a; transition: all 0.5s ease-out 0s;}
+header .content .signin-menu{height: 150px; line-height: 150px;  transition: all 0.5s ease-out 0s !important;
+}
+.showinline{display: inline-block!important;transition: all 0.5s ease-out 0s !important;}
+header .content .column{line-height: normal;}
+
+header .content .signin-menu input {
+    font-size: 14px;
+    margin-right: 20px;
+    padding: 10px;
+    width: 150px;
+}
+header .content .signin-menu .button{
+  border: 2px solid #808080;
+  border-radius: 10px;
+  color: white;
+  margin-right: 10px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease-out 0s;
+}
+header .content .signin-menu .button:hover{
+  background-color: #7dbee2;
+}
+header .content .error-div {
+    color: #db2d29;
+    display: none;
+    font-size: 14px;
+    line-height: normal !important;
+    padding-left: 95px;
+    position: absolute;
+    top: 109px;
+    vertical-align: middle;
+}
+/*generic css*/
+a{text-decoration: none;color:#b3b3b3;cursor: pointer;}
+a:hover{color:#777;}
+.row{display: block;}
+.column{display: inline-block;}
+.left{float:left;}
+.right{float:right;}
+.bluecolor{color:#66bb6a;}
+.bluebg{background-color:#7dbee2;}
+.clear{clear: both;}
+.center-align{text-align: center;}
+.right-align{text-align: left;width: 455px;}
+.left-align{text-align: left;width: 455px;}
+.teal.button{background-color: #81d4fa;color:white;}
+.red.button{background-color: #ef5350;color:white;}
+.margin70{margin: 70px  auto;}
+.margin80{margin: 80px  auto;}
+.hide{display: none!important;}
+.hidethis{display: none!important;}
+h1, .h1 {
+    color: #75858f;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    line-height: 20px;
+}h2,.h2{font-size: 16px!important;font-weight: 400!important;color: #666666;}
+h3,.h3{font-size: 18px!important;font-weight: 400!important;color: #666666;}
+h5, .h5 {
+    color: #4d4d4d;
+    font-family: "Varela round",sans-serif!important;
+    font-size: 24px !important;
+    font-weight: 600;
+}h6, .h6 {
+    color: #4d4d4d;
+    font-family: "Varela Round",sans-serif!important;
+    font-size: 36px !important;
+    font-weight: 400 !important;
+    letter-spacing: -1px;
+}/*generic css ends */
+
+section {
+    border-bottom: 1px solid #e9eff2;
+}section{height: 650px;position: relative;}
+section#thirdsection{height: 1540px;}
+
+#thirdsection .content {
+    margin: 20px auto 0;
+}
+section#firstsection .content{}
+section#firstsection .content .desc-animation{height: 63.4%;}
+section#firstsection .description{width: 500px;height: 100%;}
+section#firstsection .description h6 {
+    margin: 84px 0 12px !important;
+}
+section#firstsection .animation{width: 400px;height: 100%;}
+section#firstsection .button-div{height: 77px;width: 275px;line-height: 77px;margin-top:38px;}
+
+section#firstsection .button-div .button {
+    display: block;
+    border-radius: 10px;
+    color: white;
+    background-color: #64B5F6;
+    font-family: "Varela round",sans-serif!important;
+    font-size: 18px;
+    font-weight: 600;
+    height: 75px;
+    padding: 0;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.3s ease-out 0s;
+    width: 300px;
+}
+section#firstsection .button-div .button:hover, 
+section#fifthsection .button-div .button:hover{background-color: #4BA0E4; transition: all 0.5s ease-out 0s;}
+section#firstsection .clients{text-align: center;height: 36.6%;}
+section#firstsection .clients .text{
+	padding-bottom: 5px;
+  padding-top: 40px;
+}
+section#secondsection .content{width: 760px!important;height: 100%;}
+@media screen and (min-width: 1500px) {
+  section#secondsection .content{padding: 10% 0;}
+}
+section#secondsection .headtext{height:18%;padding: 25px 0 0;}
+section#secondsection .headtext h5{margin: 0 0 10px!important;}
+section#secondsection .headtext h1, section#thirdsection .column h1,section#fourthsection h1 {
+    line-height: 30px;
+    margin: 5px 0 10px !important;
+}
+section#secondsection .explainboxes .column {
+    border: 1px solid #b3b3b3;
+    border-radius: 12px;
+    height: 111px;
+    margin: 3% auto;
+    width: 400px;
+}
+section#secondsection .explainboxes .column .image-box{ display: inline-block;
+  height: 111px;
+  line-height: 111px;
+  vertical-align: middle;
+  width: 120px;
+}
+section#secondsection .explainboxes .column .image-box > img {
+    display: inline-block;
+    margin: auto 36px;
+    vertical-align: middle;
+}
+section#secondsection .explainboxes .column .text-box {
+    display: inline-block;
+    margin-left: 18px;
+    vertical-align: middle;
+}
+section#secondsection .explainboxes .column .text-box > h2 {
+  line-height: 28px;
+  font-weight: 700!important;
+}
+.animate > img {
+    height: 260px !important;
+    overflow: hidden;
+    width: 400px !important;
+}
+
+section#fifthsection .button-div .button {
+    border-radius: 10px;
+    color: white;
+    display: inline-block;
+    background-color: #64B5F6;
+    font-family: "Varela round",sans-serif!important;
+    font-size: 21px;
+    font-weight: 700;
+    height: 70px;
+    line-height: 70px;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 0!important;
+    width: 300px;
+    transition: all 0.3s ease-out 0s;
+}
+
+#thirdsection .column.description > h5 {
+    border-bottom: 2px solid #caddff;
+    margin: 45px auto 20px;
+    padding-bottom: 10px;
+     display: inline-block;
+}
+section#fourthsection{height: 430px;}
+section#fifthsection .content, section#fourthsection .content{
+  height: 100%;
+}
+section#fifthsection .content .headtext, section#fourthsection .content .headtext {
+    height: 61.3%;
+    line-height: 365px;
+}
+
+section#fourthsection .content .headtext .line-height-normal > h5 {
+    margin: 0 0 62px 0;
+}
+
+section#fifthsection .content .headtext .line-height-normal, 
+section#fourthsection .content .headtext .line-height-normal{
+  display: inline-block;
+    vertical-align: middle;}
+section#fifthsection .content .headtext .line-height-normal h5{margin: 0!important;line-height: normal!important;}
+section#fifthsection .button-div {
+    height: 125px;
+    line-height: 125px;
+}
+section#fifthsection .row .addressdiv{line-height: 25px;}
+.margin-bottom-30{margin-bottom: 30px;}
+.margin-left-30{margin-left: 10px;}
+
+.row.footer-links {
+    margin: 2% auto;
+}
+section#fifthsection .header-menu{height: 60px;}
+section#fifthsection .header-menu a{margin-left: 20px!important;}
+section#fifthsection .logo img {
+  position: relative;
+  top: -20px;
+}
+#thirdsection .content .row {
+    margin: 30px auto !important;
+}
+.margin-60{margin:60px auto!important;}
+
+/*get started*/
+section.registerform label {
+  color: #b3b3b3;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 33px;
+}
+  input{padding: 18px 20px;width: 215px;}  
+  select{padding: 0 20px;width: 254px;height: 53px;}
+input, select {
+  background-color: white;
+  border: 1px solid #66bb6a;
+  border-radius: 8px;
+  color: #b3b3b3;
+  font-size: 18px;
+  font-family: "Josefin Sans", sans-serif!important;
+}
+option{ 
+  padding: 18px;
+  border-bottom: 1px solid #b3b3b3;
+  width:200px;
+}
+option:checked{ font-weight: 700;}
+input:focus, select:focus{
+  border: 2px solid #66bb6a!important;
+  color: #666;
+  outline: none
+}
+label > input:focus, label > select:focus {
+  color: #000!important; 
+}
+.error {
+    border: 1px solid #ef5350 !important;
+    color: #ef5350;
+}
+.errorlabel{
+  color: #ef5350!important;
+}
+.button {
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px 15px 10px 19px;
+  text-align: center;
+}
+section.getstarted-form{border:none!important;}
+section.registerform .row.firstrow{height: 200px;}
+section.registerform .row.firstrow .bottomdiv{
+  top: 100%;
+  transform: translateY(100%);}
+
+.invalid-input, .valid-input{display: none;}
+.invalid-input, .valid-input , .validation-link{
+  font-family: "Varela Round",sans-serif!important;
+  margin: 0 10px;
+  letter-spacing: -1px;
+  font-weight: 400!important;
+}
+#showonsuccess {
+  height: 400px;
+  line-height: 400px;
+  text-align: center;
+}
+#showonsuccess .column{
+  vertical-align: middle;
+  display: inline-block;
+  line-height: normal;
+}
+
+/* responsive screen for window < 756 */
+@media screen and (max-width: 756px) {
+  h1, .h1{line-height: 20px!important}
+  h2, .h2{margin: 0;}
+  .logo img {
+    width: 151px;
+}
+ header .content .header-menu{display: none;}
+  header .content, section .content{width: auto;margin: 0 auto;}
+  .column{display: block;}
+  
+  .right{float: none;text-align: center;}
+  .left{float: none;text-align: center;}
+  .right-align{text-align: center;}
+  .left-align{text-align: center;}
+  section{height: auto!important;}
+  section#firstsection .content{height: auto!important;}
+  section#firstsection .content .clientlogos .column{display: inline-block;}
+  section#firstsection .description h6 {
+    margin: 84px 0 12px !important;
+    line-height: 40px;
+}
+  header .content .logo a, header .content .header-menu{float: right;}
+  section#firstsection .description{width: auto;height: auto;}
+  section#firstsection .button-div{width: auto;text-align: center;}
+  section#firstsection .content .desc-animation{height: auto;text-align: center;}
+  section#firstsection .animation {display: inline-block;}
+  section#secondsection .content {
+    width: auto !important;
+    margin: 40px 30px;
+}
+  section#secondsection .explainboxes .column{text-align: left;margin:10% auto;width: auto!important}
+  section#secondsection .explainboxes .column .text-box{margin-left: 0!important}
+  section#secondsection .explainboxes .column .text-box h2{font-size: 12px!important;}
+  section#secondsection .explainboxes .column .image-box{width: auto!important;}
+  section#secondsection .explainboxes .column .image-box > img{margin:auto 15px!important;}
+  section#thirdsection .content .column.description {
+    width: auto!important;
+    padding: 10px 20px;
+}
+  section#fifthsection .footer-links{text-align: center;}
+  section#fifthsection .footer-links .column{display:block;text-align: left;margin: 18px 25px;}
+  section#firstsection .button-div{display: inline-block!important;}
+  section#secondsection .content{width: auto!important;}
+  .animate > img {
+    height: auto !important;
+    overflow: hidden;
+    width: 320px !important;
+}
+.margin-bottom-30{margin: 0!important;}
+#footer-logo{display: none!important}
+}
+@media screen and (min-width: 1500px) {
+  section#firstsection .content{height: 80%;}
+}
+
+#fifthsection .content .row .column span.bluecolor {
+  font-family: "Varela Round",sans-serif !important;
+  font-weight: 700;
+}
+.font700{font-weight: 700!important;}
+.footer-links .column{display: inline-flex;margin-left: 25px;}
+#footer-logo{
+  position: relative;
+  top: -10px;
+  float: right;
+}
+
+.bottomdiv .column {
+  vertical-align: initial;
+}
+
+#registerform,.helptext  {
+    margin-left: 17%;
+    text-align: justify;
+    width: 65%;
+}
+
+#registerform input, #registerform select{
+ border: 1px solid #e9eff2;
+ outline: none
+}
+#registerform input:focus, #registerform select:focus{
+ border: 2px solid #66bb6a!important;
+ outline: none
+}
+label {
+    color: #e9eff2 !important;
+    display: block;
+    font-family: "Varela Round",sans-serif!important;
+    padding-bottom: 34px;
+    text-align: left!important;
+}
+.labelfocus{
+  color: #66bb6a!important;
+  transition: all 0.5s ease !important;
+}
+#registerform{text-align: center;}
+#registerform .row {
+    max-width: 495px;
+    text-align: left;
+}
+
+#hungerboxnew p {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+
+/*animation in elements*/
+.animBlock {
+  display: inline-block;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  position: relative;
+  -webkit-transition: all .4s ease-in;
+  -moz-transition: all .4s ease-in;
+  -ms-transition: all .4s ease-in;
+  -o-transition: all .4s ease-in;
+  transition: all .4s ease-in;
+}
+.animBlock[data-position="left"] { left: -2%; }
+.animBlock[data-position="right"] { right: -2%; }
+ 
+.animBlock[data-position="left"].viewed {
+  left: 0%;
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+.animBlock[data-position="right"].viewed {
+  right: 0%;
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+
+/* eventss page*/
+section.events .header-menu, section.events .header-menu .divider, section.events .header-menu .item
+{
+    display: inline-block;
+} 
+section.events .header-menu .divider{margin: 0 10px;}
+section.events .header-menu .item{position: relative;
+    top: -2px;}
+section.events .header-menu .divider img, section.events .header-menu .item img{
+  vertical-align: middle;
+}
+section.events#firstsection{
+  background-image: url('/gc-static/images/dark_pic.png');
+  background-size: cover;
+}
+section.events#firstsection .left.description{
+  width: 600px!important;
+}
+section.events#firstsection .left.description h5{
+  font-weight: normal!important;
+}
+section.events .column.description h6{
+    font-size: 48px !important;
+    color:white!important;
+    letter-spacing: 0!important;
+    line-height: 53px!important;
+}
+/*section.events .column.description h1{font-family: "Varela Round", sans-serif!important;}*/
+section.events .button-div .button{font-size: 20px!important;}
+section#thirdsection.events {
+    height: 1104px !important;
+     background: #f5f5f5 none repeat scroll 0 0;
+    position: relative;
+}
+section.events#thirdsection .column.description > h5 {
+    border-bottom: 2px solid #caddff;
+    color: #66bb6a!important;
+    display: inline-block;
+    margin: 45px auto 20px;
+    padding-bottom: 10px;
+}
+section.events#thirdsection .column.description > h1{
+  color:#444444!important;
+}
+section#thirdsection.events .animate img{
+    width:400px!important;
+    height: auto!important;
+}
+section#fourthsection.events {
+    height: 277px!important;
+    border:none!important;
+}
+section#fourthsection.events .content .headtext .line-height-normal > h5 {
+    font-weight: normal;
+    line-height: 36px;
+    margin: 0 0 62px;
+}
+section#fifthsection.events{
+  height: auto!important;
+}
+section#fifthsection.events .clients {
+    margin: 0 0 35px;
+    text-align: center;
+}
+section#fifthsection.events .content .text {
+    padding-bottom: 20px;
+    padding-top: 40px;
+}
+section#fifthsection.events .content .text h2{font-family: "Varela Round", sans-serif!important;}
+section#fifthsection.events .content .clientlogos .logos{
+  height: 125px;
+  background-image: url(/gc-static/images/events/vendor_logos.png);
+}
+section#fifthsection.events .content .clientlogos .logos#vendor1{
+  background-position: 0 0;
+    width: 170px;
+}
+section#fifthsection.events .content .clientlogos .logos#vendor2{
+  background-position: -198px 0;
+    width: 170px;
+}
+section#fifthsection.events .content .clientlogos .logos#vendor3{
+  background-position: -400px 0;
+    width: 196px;
+}
+section#fifthsection.events .content .clientlogos .logos#vendor4{
+  background-position: -607px 0;
+    width: 170px;
+}
+section#fifthsection.events .content .clientlogos .logos#vendor5{
+  background-position: -847px 0;
+    width: 130px;
+}
+
+section.events .bottomdiv {
+    padding-top: 120px;
+}
+
+}
+.content .column {
+  background-color: white;
+}
+
+.back{
+  background-color: rgba(0, 0, 0, 0.53);
+  height: 100%;
+  width: 400px;
+  margin-top:10%;
+}
+.back_in{
+  padding-top: 50px; 
+  margin-left:100px; 
+  padding-bottom: 50px;
+}
+
+
+
+.types{
+  position: relative;
+  top:200px;
+}

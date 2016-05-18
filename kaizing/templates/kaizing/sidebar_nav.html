@@ -1,0 +1,262 @@
+<ul class="sidebar-menu">
+
+
+{% if advanced_features %}
+    <form id="search_side" class="sidebar-form">
+        <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Search..." onclick="value=''"/>
+            <span class="input-group-btn">
+                <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+            </span>
+        </div>
+    </form>
+{% endif %}
+
+    <li>
+        <a href="{# {% url bizmanager_dashboard_overview biz.biz_id %} #}" class="js-nav">
+            <i class="fa fa-dashboard"></i>
+            <span>Dashboard</span>
+        </a>
+    </li>
+
+   
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-users"></i>
+                <span>Customers</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <a href="{# {% url biz_customers biz.biz_id %} #}" class="js-nav nav-child">
+                        <i class="fa fa-angle-double-right"></i>
+                        Customers
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{# {% url biz_customers_trends biz.biz_id %} #}" class="js-nav nav-child">
+                        <i class="fa fa-angle-double-right"></i>
+                        Top Trends
+                    </a>
+                </li>
+                <li>
+                    <a href="{# {% url biz_feedback biz.biz_id %} #}" class="js-nav nav-child">
+                        <i class="fa fa-angle-double-right"></i>
+                        Feedback
+                    </a>
+                </li>
+                {# {% if user.is_super
+                    or ((user.has_perm('common.subadmin_update_customer_points')
+                            and user.has_perm('common.subadmin_update_customer_details'))
+                        or user.has_perm('common.subadmin_update_customer_balance')
+                        or user.has_perm('common.subadmin_redeem_rewards')) %} #}
+                    <li>
+                        <a href="{# {% url customer-actions biz.biz_id %} #}"
+                           class="js-nav nav-child">
+                            <i class="fa fa-angle-double-right"></i> Actions
+                            <small class="badge pull-right bg-green">new</small>
+                        </a>
+                    </li>
+                {# {% endif %} #}
+            </ul>
+        </li>
+    {# {% endif %} #}
+
+
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-th"></i>
+            <span>Locations</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li>
+                <a href="{# {% url 'biz_location_stats_summary' biz.biz_id %} #}" class="js-nav nav-child">
+                    <i class="fa fa-angle-double-right"></i>
+                    Location Stats
+                </a>
+            </li>
+            {% if biz.is_payments_enabled %}
+                <li>
+                    <a href="{# {% url 'biz_prepaid_location_stats_summary' biz.biz_id %} #}" class="js-nav nav-child">
+                        <i class="fa fa-angle-double-right"></i>
+                        Prepaid Location Stats
+                    </a>
+                </li>
+            {% endif %}
+
+            {%  if biz.is_rewards_enabled %}
+                <li>
+                    <a href="{# {% url 'biz_sku_lookup' biz.biz_id %} #}" class="js-nav nav-child">
+                        <i class="fa fa-angle-double-right"></i>
+                        SKU Data Lookup
+                    </a>
+                </li>
+            {%  endif %}
+
+        </ul>
+    </li>
+    {# {% endif %} #}
+
+
+   {#  {% if user.has_perm('common.administer_biz')
+        or (user.has_perm('common.sub_administer_biz')
+            and (user.has_perm('common.crm_view_log_stats'))) %}
+ #}
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-edit"></i>
+            <span>Logs</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            {% if biz.is_payments_enabled %}
+                <li>
+                    <a href="{# {% url biz_payment_history biz.biz_id %} #}" class="js-nav nav-child">
+                        <i class="fa fa-angle-double-right"></i>
+                        Prepaid Payment Logs
+                    </a>
+                </li>
+            {% endif %}
+            <li>
+                <a href="{# {% url 'biz_customer_activity' biz.biz_id %} #}" class="js-nav nav-child">
+                    <i class="fa fa-angle-double-right"></i>
+                    Activity Logs
+                </a>
+            </li>
+
+            {% if biz.is_ordering_enabled %}
+                <li>
+                    <a href="{# {% url biz_customer_orders biz.biz_id %} #}" class="js-nav nav-child">
+                        <i class="fa fa-angle-double-right"></i>
+                        Orders
+                    </a>
+                </li>
+            {%  endif %}
+        </ul>
+    </li>
+    {# {% endif %} #}
+
+   {#  {% if user.has_perm('common.administer_biz')
+        or (user.has_perm('common.sub_administer_biz')
+            and (user.has_perm('common.crm_view_biz_integration'))) %} #}
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-plus-square"></i>
+                <span>Business Integration</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                {% if user.is_superuser %}
+                    <li>
+                        <a href="/portal/createbiz/" class="js-nav nav-child">
+                            <i class="fa fa-angle-double-right"></i>
+                            Create New Business
+                        </a>
+                    </li>
+                {% endif %}
+                <li>
+                    <a href="/portal/{{biz.biz_id}}/apikeys/" class="js-nav nav-child">
+                        <i class="fa fa-angle-double-right"></i>
+                        Users (PoS + Sub-admins)
+                    </a>
+                </li>
+            </ul>
+        </li>
+    {# {% endif %} #}
+
+    {# {% if user.has_perm('common.administer_biz')
+        or (user.has_perm('common.sub_administer_biz')
+            and (user.has_perm('common.crm_view_plastic_card_stats'))) %} #}
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-credit-card"></i>
+                <span>Plastic Cards</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <a href="{# {% url 'bizmanager_cards_batch_list' biz.biz_id %} #}" class="js-nav nav-child">
+                        <i class="fa fa-angle-double-right"></i>
+                        Provision
+                    </a>
+                </li>
+            </ul>
+        </li>
+    {# {% endif %} #}
+
+
+{#    {% if user.is_admin_of.count() > 1 %}#}
+{#        <li class="treeview">#}
+{#            <a href="#">#}
+{#                <i class="fa fa-list"></i>#}
+{#                <span>My Businesses</span>#}
+{#                <i class="fa fa-angle-left pull-right"></i>#}
+{#            </a>#}
+{#            <ul class="treeview-menu">#}
+{#                {% for admin_biz in user.is_admin_of.all() %}#}
+{#                    <li>#}
+{#                        <a href="{% url bizmanager_dashboard_overview admin_biz.biz.biz_id %}" class="js-nav nav-child">#}
+{#                            {{admin_biz.biz_name}}#}
+{#                        </a>#}
+{#                    </li>#}
+{#                {% endfor %}#}
+{#            </ul>#}
+{#        </li>#}
+{#    {% endif %}#}
+
+    {# {% if user.has_perm('common.administer_biz')
+        or (user.has_perm('common.sub_administer_biz')
+            and user.has_perm('common.crm_view_biz_settings')) %} #}
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-suitcase"></i>
+                <span>Business Settings</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <a href="{# {% url biz_details_edit biz.biz_id %} #}" class="js-nav nav-child">
+                        <i class="fa fa-angle-double-right"></i>
+                        Business Profile
+                    </a>
+                </li>
+                <li>
+                    <a href="{# {% url biz_locations biz.biz_id %} #}" class="js-nav nav-child">
+                        <i class="fa fa-angle-double-right"></i>
+                        Business Locations
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{# {% url biz_customer_offers biz.biz_id %} #}" class="js-nav nav-child">
+                        <i class="fa fa-angle-double-right"></i>
+                        Offers
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{# {% url biz_rewards_list biz.biz_id %} #}" class="js-nav nav-child">
+                        <i class="fa fa-angle-double-right"></i>
+                        Rewards
+                    </a>
+                </li>
+                <li>
+                    <a href="{# {% url biz_rewards_promote biz.biz_id %} #}" class="js-nav nav-child">
+                        <i class="fa fa-angle-double-right"></i>
+                        Promote
+                    </a>
+                </li>
+                    <!--
+                    <li>
+                        <a href="/portal/{{biz.biz_id}}/billing/" class="js-nav nav-child">
+                            <i class="fa fa-angle-double-right"></i>
+                            Billing
+                        </a>
+                    </li>
+                    -->
+            </ul>
+        </li>
+    {# {% endif %} #}
+</ul>

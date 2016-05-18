@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+xmlns:og="http://ogp.me/ns#"
+xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kaizing - Online Services</title>
+  <meta name="description" content="Fresh tasty lunch & dinner delivered to your location. Order food in just 3 clicks & Kaizing will deliver it from its handpicked kitchens." />
+  <meta name="author" content="Kaizing" />
+  <meta name="keywords" content="iit kharagpur, iit kgp, iit food, online food, biryani, dosa, iit kharagpur online food, kgp food online, kgp biryani, kgp dosa" />
+  <meta name="google-site-verification" content="" />
+  <meta property="og:title" content="Kaizing | Fresh tasty lunch & dinner delivered to your location. Order food in just 3 clicks & Kaizing will deliver it from its handpicked kitchens." />
+  <meta name="author" content="Kaizing" />
+  <meta property="og:url" content="http://www.kaizing.com/">
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/static/images/logo_v1.png" />
+  <meta property="og:image" content="/static/images/banner_2_v2.jpg" />
+  <meta property="og:image" content="/static/images/banner_hb_v1.jpg" />
+  <meta property="og:site_name" content="Kaizing" />
+  <meta property="fb:admins" content="1539115276, 1439084056" />
+  <meta property="fb:app_id" content="882833805120481">
+  <meta property="og:description" content="Kaizing || " />
+  <!-- <meta name="fragment" content="!"> -->
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'kaizing/css/semantic.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'kaizing/css/responsive_style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'kaizing/css/style.css' %}" />
+
+    <script type="text/javascript" src="/static/kaizing/js/semantic.min.js" ></script>
+    <script type="text/javascript" src="/static/kaizing/js/common.js" ></script>
+    <script type="text/javascript" src="/static/kaizing/js/google_maps.js" ></script>
+    <script type="text/javascript" src="/static/kaizing/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/kaizing/js/jquery.cookie.js" ></script>
+
+  <link rel="image_src" href="/static/images/logo_huge_red.png" / ><!--formatted-->
+  <link rel="icon" type="image/png" href="/static/images/favicon.ico" /><!-- end -->
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <script>(function() {
+  var _fbq = window._fbq || (window._fbq = []);
+  if (!_fbq.loaded) {
+  var fbds = document.createElement('script');
+  fbds.async = true;
+  fbds.src = '//connect.facebook.net/en_US/fbds.js';
+  var s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(fbds, s);
+  _fbq.loaded = true;
+  }
+  _fbq.push(['addPixelId', '1627562080827966']);
+  })();
+  window._fbq = window._fbq || [];
+  window._fbq.push(['track', 'PixelInitialized', {}]);
+  </script>
+  <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=1627562080827966&amp;ev=PixelInitialized" /></noscript>
+
+</head>
+
+<body>
+  <div class="cover" id="mainloading">
+    <a href="/"><img src="{% static 'kaizing/images/loading.gif' %}"></a>
+  </div>
+  <div class="main-container">
+
+    <div class="mainpage">
+
+      <div class="ui top attached demo menu custom-menu scrolled">
+        <a class="" href="/">
+          <div class="logodiv logo_scrolled">
+          <h2 style="margin-top: 10px;color: white;font-family: bariol;">Kaizing</h2>
+          </div>
+        </a>
+        <a class="item hamburger-icon">
+          <i class="sidebar icon"></i>
+        </a>
+        <div class="desktop-nav nav_scrolled">
+        <!--   <a class="item" id="subscription" title=""><img src="/static/images/SubButton.png" alt="subscription"></a> -->
+        </div>
+    </div>
+    <div class="ui bottom attached segment pushable">
+      <div style="display:none"><h1>Order Lunch & Dinner Online</h1></div>
+      <div class="sections dimmed">
+        <section  id="firstsection">
+          <!-- <div class="layer"> -->
+
+          <div class="centerbox row">
+
+            <div class="locationdiv">
+                
+                <div class="ui large input floatleft selectiondiv">
+                  <input type="hidden" id="hiddenMenuType" />
+                  <input type="hidden" name="select_flag" id="select_flag" value="0">
+                </div>
+                <div class="col s12">
+                  <a href="{% url 'kaizing:vendordisplay' %}" class="ui button orderbutton" >Kaizing Foods</a>
+                </div>
+            </div>
+          </div> 
+      </section>
+      <div class="row">
+      <section class="secondsection" id="aboutus">
+        <div class="head">About Us</div>
+        <div class="col s12 align-center">
+        <div style="display:none"><h1>Order Lunch & Dinner Online</h1></div>
+        <p>
+          You just don't have the time to cook (or can’t) and the food at your office is um - less than great. Plus, food delivery services have always been a hassle to deal with. Until now.
+          <br><br>
+          <h1><strong>Kaizing</strong></h1>
+          <br>
+          <br>
+          Whole meals for breakfast, lunch and dinner, from a very select choice of kitchens delivered to your office or home.
+          <br>
+          The clincher? You can order in advance, put it out of your mind and receive your favourite meals before those hunger pangs kick in every day.
+          <br>
+          The multi-cuisine menus rotate daily - a pleasant surprise. Every. Single. Time.
+          <br>
+           
+          </p>
+        </div>
+      </section>
+      </div>
+      <div class="row">
+      <form action="" method="POST">{% csrf_token %}
+      <section class="fifthsection" id="contactus">
+        <div class="head">Contact Us</div>
+        <div>
+        <div id="feedbackdiv" class="col s12 align-center" >
+        <div class="ui heading">We would love to hear from you</div>
+          <div class="ui body">
+            
+          <div class="ui two column middle aligned very relaxed stackable grid">
+            <div class="column">
+              <div class="ui form">
+                  <div class="ui field">
+                    <input type="text" name="feedback_name" value="" placeholder="Enter Name">
+                  </div>
+                   <div class="ui field">
+                    <input type="text" name="feedback_phone" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' value="" placeholder="Enter your phone">
+                  </div>
+                   <div class="ui field">
+                    <input type="email" name="feedback_email" value="" placeholder="Enter your email(optional)">
+                  </div>
+              </div>  
+            </div>
+            <div class="center aligned column">
+              <div class="ui form">
+                <div class="ui field">
+                    <textarea name="feedback" placeholder="Write your feedback." rows="2" required></textarea>
+                </div>
+              </div>
+            </div>
+            </div>
+                  <div class="button-div"><button type="submit" class="ui button red" onclick="send_feedback()">SEND MESSAGE</button></div>
+          </div>
+        </div>
+          <div class="ui raised segment" id="feedbackthanksdiv" style="display:none;">Thanks a lot. We will get back to you soon.</div>
+          </div>
+        <div style="display:none"><h1>Order Lunch & Dinner Online</h1></div>
+        <div class="contact-details">
+          <div class="ui two column very relaxed stackable grid">
+            <div class="column"><p id="first"> Give us a call at &nbsp;<strong>+91 xxxxxxxxxx</strong></p></div>
+            <div class="column"><p id="second"> Else drop us a mail at &nbsp; <strong>emaiild</strong></p></div>
+          </div>
+        </div>
+          <div class="ic_div">
+            <a href="https://www.facebook.com/kaizing.india" target="_blank">
+              <img src="{% static 'kaizing/images/ic_fb.png' %}">
+            </a>
+          </div>
+        </section>
+      </form>
+      </div>
+      <footer>
+        <div>
+        <p>&#169;&nbsp;2016, Kaizing</p>
+        </div>
+      </footer>
+    </div>
+  </div>
+  </div>
+  </div>
+<div id="subscription_modal" class="ui small modal">
+<div class="content">
+    <div class="description">
+<!--     <div class="modal-content">
+        <div class="copy" id="form-div">
+ -->            <section class='contentsection' id="subscribe_div">
+                <div class="heading">subscribe for great meals</div>
+                  <div class="content">
+                    <div class="sub-section">
+                      <div class="text-area">
+                        <div class="icon" id="first"></div>
+                        <div class="text">Veg and Non-Veg meals to delicious Calorie Counted thalis for your lunch</div>
+                      </div>
+                      <div class="text-area">
+                        <div class="icon" id="second"></div>
+                        <div class="text">Get great daily consumable food options</div>
+                      </div>
+                      <div class="text-area">
+                        <div class="icon" id="third"></div>
+                        <div class="text">Great food without the hassle of ordering daily</div>
+                      </div>
+                      <div class="text-area">
+                        <div class="icon" id="fourth"></div>
+                        <div class="text">Fruit salad subscription for your evenings</div>
+                      </div>
+                    </div>
+                    <div class="ui form">
+                      <div class="innerdiv">
+                        <div class="form-field">
+                          <label for="name">name</label>:
+                          <input type="text" name="name"  placeholder="Enter Name">
+                        </div>
+                        <div class="form-field">
+                          <label for="location">location</label>:
+                          <!-- <select name="location" class="ui dropdown" id="subscribe-select">
+                            <option value="">Select Location</option>
+                            option
+                          </select -->
+                          <input id="autocomplete" placeholder="Enter your address" onFocus="geolocate()" type="text" name="location"></input>
+                        </div>
+                        <div class="form-field">
+                          <label for="email">email</label>:
+                          <input type="email" name="email" value="" placeholder="Enter Email ID">
+                        </div>
+                        <div class="form-field">
+                          <label for="phone">phone</label>:
+                          <input type="text" name="phone" value="" placeholder="Enter Phone no." onkeydown="return isNumber(event);" maxlength="10">
+                        </div>
+                        
+                        <div class="button-a">
+                          <a onclick="submit_subscription()">Yes, I'm interested</a>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="contentsection" id="thanks-div" style="display:none">
+              <div class="dance-image"></div>
+              <div class="thanks-heading">Thanks you for subscription</div>
+              <div class="thanks-msg">we will call you shortly</div>
+              <div class="new-subscription">
+                <a onclick="showsubs()" class="new-subsciption-btn">New Subscription</a>
+              </div>
+            </section>
+            <div class="clear"></div>
+        </div>
+<!--         </div>
+        </div>
+ -->    <!-- <div class="overlay"></div> -->
+</div>
+</div>
+
+<div class="ui small modal timeout" id="timeout-modal">
+  <div class="content">
+    <div class="description">
+      <p ng-bind="timeout_msg"></p>
+    </div>
+  </div>
+</div>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6tgfi27qogFlwXc3LC87RjSiALH_XiuE&libraries=places&callback=initAutocomplete"
+        async defer></script>
+<!-- jQuery -->
+<script type="text/javascript">
+  ('send', 'pageview',{'title': 'Home'});
+</script>
+<script type="text/javascript">
+    // Loading for page load
+    $(window).on('load', function() {
+      $(".cover#mainloading").fadeOut(600);
+       $('#firstsection').height(window.innerHeight);
+    });
+    function newW() {
+      $(window).load();
+    }
+    setTimeout(newW, 600);
+
+
+  </script>
+  <script type="text/javascript">
+    $('.ui.modal.campaign').modal('hide');
+    $(window).ready(function(){
+
+        $(':input','#subscribe_div .form').not(':button, :submit, :reset, :hidden').val('').removeAttr('checked').removeAttr('selected');
+        $(':input','#feedbackdiv .form').not(':button, :submit, :reset, :hidden').val('').removeAttr('checked').removeAttr('selected');
+      $('#subscription').click(function(){
+        $('#subscription_modal').modal("show");
+      });
+      slowscroll();
+      $.removeCookie('lunchCart'); 
+      $.removeCookie("lunchUnicounter"); 
+      $.removeCookie("snacksCart"); 
+      $.removeCookie("snacksUnicounter"); 
+      $.removeCookie("dinnerCart"); 
+      $.removeCookie("dinnerUnicounter"); 
+      $.removeCookie("menutypeCheckout");
+      getLocations();
+      
+  });
+    window.onscroll = function () {
+    if ($(window).width() < 960) {
+      $('.desktop-nav').hide();
+    }
+  }
+    
+
+  </script>
+  
+
+
+  <style type="text/css">
+  .pac-container {
+    background-color: #FFF;
+    z-index: 99999999!important;
+    position: fixed;
+    display: inline-block;
+    float: left;
+}
+  strong{font-weight: 500 !important;}
+  </style>
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.js"></script>
+</html>

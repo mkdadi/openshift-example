@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Kaizing||Choose Vendor</title>
+	<!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'kaizing/css/semantic.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'kaizing/css/new_style.css' %}">
+<script type="text/javascript" src="/static/kaizing/js/jquery.min.js" ></script>
+<script type="text/javascript" src="/static/kaizing/js/semantic.min.js" ></script>
+<link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400,400italic,600,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+
+<body>
+<!-- <div class="slider fullscreen" style="z-index: -100;">
+  <ul class="slides">
+    <li>
+      <img src=""> 
+      <div class="caption center-align">
+        <h3></h3>
+        <h5 class="light grey-text text-lighten-3"></h5>
+      </div>
+    </li>
+    <li>
+      <img src=""> 
+      <div class="caption left-align">
+        <h3></h3>
+        <h5 class="light grey-text text-lighten-3"></h5>
+      </div>
+    </li>
+    <li>
+      <img src=""> 
+      <div class="caption right-align">
+        <h3></h3>
+        <h5 class="light grey-text text-lighten-3"></h5>
+      </div>
+    </li>
+  </ul>
+</div> -->
+<div class="row" >
+    <div class="col s8 offset-s2" >
+        <div class="card white darken-1" >
+		    <div class="card-content">
+				<span class="card-title">{{venname}}</span>
+                <h4>Description: <span style="font-size: 11px;">{{vendescription}}</span></h4>
+				<h4>Location: <span style="font-size: 11px;">{{venlocation}}</span></h4>
+				<h4>Delivery In: <span style="font-size: 11px;">{{deliverytime}}</span></h4>
+			</div>
+          </div>
+        </div>
+	</div>
+</div>
+
+<a class="waves-effect waves-light btn-large" style="float:right;margin-top:1%;font-size:1.5em;cursor:pointer;"onclick='return storearray()' href="{% url 'kaizing:checkout' %}">Check Out<i class="material-icons right">send</i></a>
+
+
+<div style="width: 20%;height: 5%;bottom: 0;font-size: large;color: black;margin: 4%;right: 0;position: fixed;">Total =
+	<input type="number" style="color: black;" disabled=True id="carttotal" value=0></div>
+
+<div id="firstsection" class = '' style="margin-left:15%;margin-top:2%; width:65%; height:90%">
+	<header id="tableheader" style="text-align:center; font-size:1.8em;background-color: white;">
+		<div class="column" style="width:20%;float:left;">
+			<p><span class='bluecolor'>Genre</span></p>
+		</div>
+		<div class="column" style="width:20%;float:left;text-align:left">
+			<p><span class='bluecolor'>Name</span></p>
+		</div>
+		<div class="column" style="width:20%;float:left	">
+			<p><span class='bluecolor'>Price</span></p>
+		</div>
+		<div class="column" style="width:20%;float:left	">
+			<p><span class='bluecolor'>Add</span></p>
+		</div>
+	</header>
+
+	<div class="content" style="font-size:1.5em">
+		<div class="column" style="width:20%;text-align:center;float:left">
+			{% for genre in genres %}
+			<div class="row" style="">
+				<p class='genre genre{{genre.pk}} waves-effect waves-light btn' id='genre{{genre.pk}}' style="cursor:pointer" onclick="showitems({{forloop.counter0}})"><b><i>{{genre.name}}</i></b><i class="material-icons">add</i></p>
+				
+			</div>
+			{% endfor %}
+		</div>
+		
+		<div id = 'name_id' class="column" style="width:20%; float:left;">
+			{% for item in items %}	
+			<div class="row row{{forloop.counter0}} hide">
+				<p>{{item.name}}</p>
+			</div>
+			{% endfor %}
+		</div>
+		<div id = 'price_id' class="column" style="width:20%; float:left; text-align:center">
+			{% for item in items %}	
+			<div class="row row{{forloop.counter0}} hide">
+				<p>₹{{item.price}}</p>
+			</div>
+			{% endfor %}
+		</div>
+		<div id='adder_id' class="column" style="width:20%; float:left;text-align:center;">
+			{% for item in items %}
+			{% if isopen == True %}
+			{% if item.isavailable == True %}
+			<div class="row row{{forloop.counter0}} hide">
+				<p><span style="border:2px ; cursor:pointer;display:inline-block" onclick="if(document.querySelector('#itemno{{item.pk}}').innerHTML>0){document.querySelector('#itemno{{item.pk}}').innerHTML--;minuscounter({{item.pk}});}">-</span><span id='itemno{{item.pk}}' style="margin-left:10%"> 0 </span> <span style="border:2px ;border-radius:5px; cursor:pointer; display:inline-block;display:inline-block" onclick="if(document.querySelector('#itemno{{item.pk}}').innerHTML<{{item.num}}){document.querySelector('#itemno{{item.pk}}').innerHTML++;pluscounter({{item.pk}});}">+</span></p>
+			</div>
+			{% else %}
+			<div class="row row{{forloop.counter0}} hide">
+				<p>NA</p>
+			</div>
+			{% endif %}
+			{% else %}
+			<div class="row row{{forloop.counter0}} hide">
+				<p>Closed</p>
+			</div>
+			{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	var cart = [];
+	var vendor_id = {{vendor_id}};
+	var totalen = {{totalnoitems}};
+	var itemgenrelistarr={{itemgenrelist}};
+	var prices = [{% for item in items %} "{{item.price}}",{% endfor %}];
+	var itemslist = [{% for item in items %} "{{item.pk}}",{% endfor %}];
+	function pluscounter(pk){
+		cart.push(pk);
+		for (var i=0;i<itemslist.length;i++) {
+            if (parseInt(itemslist[i],10)==pk) {
+                document.getElementById('carttotal').setAttribute('value',parseInt(parseInt(document.getElementById('carttotal').getAttribute('value'))+parseInt(prices[i])));
+            }
+        }
+		// console.log(cart);
+	};
+	function minuscounter(pk){
+		if (cart!=[]){
+			var removeindex = cart.indexOf(pk);
+			cart.splice(removeindex, 1);
+			for (var i=0;i<itemslist.length;i++) {
+                if (parseInt(itemslist[i],10)==pk) {
+                    document.getElementById('carttotal').setAttribute('value',parseInt(parseInt(document.getElementById('carttotal').getAttribute('value'))-parseInt(prices[i])));
+                }
+            }
+			// console.log(cart);
+		}	
+	};
+	function showitems(id){
+		for (var j=0;j<totalen;j++){
+			$('.row'+j).addClass('hide');
+		};
+		listitems=itemgenrelistarr[id];
+		for (var i=0;i<listitems.length;i++){
+			// $('.row'+(listitems[i]-1)).css('display', 'none');
+			$('.row'+(listitems[i]-1)).removeClass('hide');
+		};
+
+	};
+	function displaygenre(vendorno){
+		$('.genre').each(function(){
+			console.log(vendorno);
+			//var a={{vendors.0}};
+			console.log(a[0]);
+		});
+	}
+	function displayitems(genreno){
+		console.log(genreno);
+		//var itemarray = {{itemgenrelist|safe}};
+		console.log(itemarray);
+	};
+	function storearray(){
+		sessionStorage.setItem('cart', cart);
+		sessionStorage.setItem('vendor_id',vendor_id);
+		console.log(cart);
+		console.log(vendor_id);
+		return totalcheck();
+	};
+	function totalcheck() {
+        var total=document.getElementById('carttotal').getAttribute('value');
+		if (parseInt(total)==0) {
+            alert("You don't have any items in the cart");
+			return false;
+        }
+		return true;
+    }
+	$(document).ready(function(){
+      $('.slider').slider({full_width: true});
+    });
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.js"></script>
+</body>
+</html>

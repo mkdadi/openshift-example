@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Kaizing||Choose Vendor</title>
+	<!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'kaizing/css/semantic.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'kaizing/css/new_style.css' %}">
+<script type="text/javascript" src="/static/kaizing/js/jquery.min.js" ></script>
+<script type="text/javascript" src="/static/kaizing/js/semantic.min.js" ></script>
+<link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400,400italic,600,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+
+<body>
+<div class="slider fullscreen" style="z-index: -100;">
+  <ul class="slides">
+    <li>
+      <img src="https://unsplash.imgix.net/photo-1414924347000-9823c338079b?q=75&fm=jpg&s=0fa6db3cdc65e50c111575043fad4b5c"> <!-- random image -->
+      <div class="caption center-align">
+        <h3></h3>
+        <h5 class="light grey-text text-lighten-3"></h5>
+      </div>
+    </li>
+    <li>
+      <img src="https://ununsplash.imgix.net/photo-1414849424631-8b18529a81ca?q=75&fm=jpg&s=0e993004a2f3704e8f2ad5469315ccb7"> <!-- random image -->
+      <div class="caption left-align">
+        <h3></h3>
+        <h5 class="light grey-text text-lighten-3"></h5>
+      </div>
+    </li>
+    <li>
+      <img src="https://ununsplash.imgix.net/uploads/1413259835094dcdeb9d3/6e609595?q=75&fm=jpg&s=6a4fc66161293fc4a43a6ca6f073d1c5"> <!-- random image -->
+      <div class="caption right-align">
+        <h3></h3>
+        <h5 class="light grey-text text-lighten-3"></h5>
+      </div>
+    </li>
+  </ul>
+</div>
+<div class="types">
+		<p class='grey darken-4 waves-effect waves-light btn-large'><b><i>Types</i></b><i class="material-icons">view_list</i></p>
+		<td class="column" style="width:20%;text-align:center;float:left">
+			{% for genre in genres %}
+			<div class="row" style="">
+				<p class='genre genre{{genre.pk}} waves-effect waves-light btn' id='genre{{genre.pk}}' style="cursor:pointer" onclick="showitems({{forloop.counter0}})"><b><i>{{genre.name}}</i></b><i class="material-icons">add</i></p>
+				
+			</div>
+			{% endfor %}
+		</td>
+</div>
+<a class="waves-effect waves-light btn-large" style="float:right;margin-top:0px;font-size:1.5em;cursor:pointer;"onclick='storearray()' href="{% url 'kaizing:checkout' %}">Check Out<i class="material-icons right">send</i></a>
+
+<table id="firstsection" class="centered responsive-table">
+      <thead>
+	<tr id="tableheader" style="font-size:1.8em">
+		
+		<th class="column">
+			Name
+		</th>
+		<th class="column">
+			Price
+		</th>
+		
+		<th class="column" >
+			Add
+		</th>
+	</tr>
+	</thead>
+	<tbody class="content" style="font-size:1.5em">
+	<tr>
+		
+		
+		<td id = 'name_id' class="column">
+			{% for item in items %}	
+			<div class="row row{{forloop.counter0}} hide">
+				<p>{{item.name}}</p>
+			</div>
+			{% endfor %}
+		</td>
+		<td id = 'price_id' class="column">
+			{% for item in items %}	
+			<div class="row row{{forloop.counter0}} hide">
+				<p>₹{{item.price}}</p>
+			</div>
+			{% endfor %}
+		</td>
+		
+		<td id='adder_id' class="column">
+			{% for item in items %}	
+			<div class="row row{{forloop.counter0}} hide">
+				<p><span style="border:2px ; cursor:pointer;display:inline-block" onclick="if(document.querySelector('#itemno{{item.pk}}').innerHTML>0){document.querySelector('#itemno{{item.pk}}').innerHTML--;minuscounter({{item.pk}});}">-</span>
+					<span id='itemno{{item.pk}}' style="margin-left:10%"> 0 </span>
+					<span style="border:2px ;border-radius:5px; cursor:pointer; display:inline-block;display:inline-block" onclick="if(document.querySelector('#itemno{{item.pk}}').innerHTML<{{item.num}}){document.querySelector('#itemno{{item.pk}}').innerHTML++;pluscounter({{item.pk}});}">+</span>
+				</p>
+			</div>
+			{% endfor %}
+		</td>
+	</tr>
+	</tbody>
+</table>
+<script type="text/javascript">
+	var cart = [];
+	var vendor_id = {{vendor_id}};
+	var totalen = {{totalnoitems}};
+	var itemgenrelistarr={{itemgenrelist}};
+	function pluscounter(pk){
+		cart.push(pk);
+		// console.log(cart);
+	};
+	function minuscounter(pk){
+		if (cart!=[]){
+			var removeindex = cart.indexOf(pk);
+			cart.splice(removeindex, 1);
+			// console.log(cart);
+		}	
+	};
+	function showitems(id){
+		for (var j=0;j<totalen;j++){
+			$('.row'+j).addClass('hide');
+		};
+		listitems=itemgenrelistarr[id];
+		for (var i=0;i<listitems.length;i++){
+			// $('.row'+(listitems[i]-1)).css('display', 'none');
+			$('.row'+(listitems[i]-1)).removeClass('hide');
+		};
+
+	};
+	function displaygenre(vendorno){
+		$('.genre').each(function(){
+			console.log(vendorno);
+			//var a={{vendors.0}};
+			console.log(a[0]);
+		});
+	}
+	function displayitems(genreno){
+		console.log(genreno);
+		//var itemarray = {{itemgenrelist|safe}};
+		console.log(itemarray);
+	};
+	function storearray(){
+		sessionStorage.setItem('cart', cart);
+		sessionStorage.setItem('vendor_id',vendor_id);
+		console.log(cart);
+		console.log(vendor_id);
+	};
+	$(document).ready(function(){
+      $('.slider').slider({full_width: true});
+    });
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.js"></script>
+</body>
+</html>

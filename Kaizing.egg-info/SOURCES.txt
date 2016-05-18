@@ -1,0 +1,6 @@
+setup.py
+Kaizing.egg-info/PKG-INFO
+Kaizing.egg-info/SOURCES.txt
+Kaizing.egg-info/dependency_links.txt
+Kaizing.egg-info/requires.txt
+Kaizing.egg-info/top_level.txt

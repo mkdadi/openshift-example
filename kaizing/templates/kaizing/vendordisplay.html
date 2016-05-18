@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+xmlns:og="http://ogp.me/ns#"
+xmlns:fb="http://www.facebook.com/2008/fbml"><head>
+<meta http-equiv="Cache-control" content="no-cache">
+<meta http-equiv="Expires" content="-1">
+</head>
+
+ {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'kaizing/css/semantic.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'kaizing/css/responsive_style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'kaizing/css/style.css' %}" />
+
+    <script type="text/javascript" src="/static/kaizing/js/semantic.min.js" ></script>
+    <script type="text/javascript" src="/static/kaizing/js/common.js" ></script>
+    <script type="text/javascript" src="/static/kaizing/js/google_maps.js" ></script>
+    <script type="text/javascript" src="/static/kaizing/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/kaizing/js/jquery.cookie.js" ></script>
+
+<header class="">
+	<div class="ui top demo menu custom-menu">
+		<a class="" href="/">
+			<div class="logodiv"></div>
+		</a>
+
+</header>
+<div class="container" style="margin-left:0%; margin-top:9%">
+<center>
+<select id = 'selector' class="ui search selection dropdown" style="">
+{% for vendor in vendors %}
+<option value='{{vendor.pk}}'>{{vendor.name}}</option>
+{% endfor %}
+</select>
+<div class="ui input  buttondiv">
+  <a onclick="menuPage();" class="ui button orderbutton" >See Menu</a>
+</div>
+</center>
+<!--
+<div class="ui four cards">
+{% for item in vendors %}
+<div class="four wide column">
+	<div class="ui card" style="padding:10%">
+		<div class="image" style="padding:5px">
+	    	<img src="{% static 'kaizing/images/store1.jpg' %}">
+	  	</div>
+	  <div class="content">
+	    <a class="header">{{item.name}}</a>
+
+	    <div class="description">
+	      Kristy is an art director living in New York.
+	    </div>
+	  </div>
+	</div>
+ </div>
+{% endfor %}
+</div>-->
+
+<!--<div class="cover" ng-show="LOADING">
+	      <img src="{% static 'kaizing/images/loading.gif' %}">
+
+</div>-->
+<div class="clear"></div>
+<div ng-show = "!LOADING">
+
+<!-- BUTTONS TO SWITCH BETWEEN LUNCH & SNACKS -->
+
+
+<!-- BUTTONS TO SWITCH BETWEEN LUNCH & SNACKS ENDS -->
+  <div class="clear"></div>
+
+	<!-- DETAILS SECTION -->
+
+
+
+<div class="ui small modal timeout" id="timeout-modal">
+	<div class="content">
+		<div class="description">
+			<p ng-bind="timeout_msg"></p>
+		</div>
+	</div>
+</div>
+{% load staticfiles %}
+<script type="text/javascript" src="/static/kaizing/js/common.js" ></script>
+
+	<script type="text/javascript">
+		// Loading for page load
+	     $(window).on('load', function() {
+	        $(".cover#mainloading").fadeOut(200);
+	    });
+	    function newW() {
+	        $(window).load();
+	    }
+	    setTimeout(newW, 200);
+	    function menuPage(){
+	    	var value = document.getElementById('selector');
+	    	var vendorid = value.options[value.selectedIndex].value;
+	    	window.location.href = '../menu/'+vendorid
+	    }
+
+	</script>
+ 
+<style type="text/css">
+.custom-menu{height:60px;position:absolute}
+.logodiv{height:46px;left:0!important;position:absolute!important;top:7px!important;width:200px}
+.desktop-nav{top:10px!important}
+.carticonbtn{background-color:#fff!important;color:#db2d29!important;margin-right:10px!important}
+.carticonbtn .cart.icon{color:#db2d29}
+@media screen and (max-width: 560px) {
+.desktop-nav{top:60px!important}
+.logodiv{width:185px}
+}
+</style>
+
+</html>

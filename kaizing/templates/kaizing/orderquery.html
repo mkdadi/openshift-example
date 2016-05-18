@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <title>Kaizing</title>
+    </head>
+    <body>
+    <div class="row">
+        <div class="col s6 offset-s3">
+            <div class="card-panel cyan darken-3">
+              <span class="white-text">
+                {% if mode == '0' %}
+                {% if error == '1' %}
+                <h5 style="color: red;">Incorrect Order ID</h5>
+                {% endif %}
+                <form action="" method="POST">{% csrf_token %}
+                    <h5>Enter your Order ID:</h5>
+                    <input name='id' type='text' />
+                    <button class="waves-effect waves-light btn" type="submit" name="submit">Check Status</button>
+                </form>
+                {% else %}
+                Your order : <i style="color: blue;">{{id}}</i>.<br/>
+                Name : {{name}}<br/>
+                Phone : {{phone}}<br/>
+                Email : {{email}}<br/>
+                Slot : {{slot}}<br/>
+                Address : {{address}}<br/>
+                Total : {{total}}<br/>
+                Items : {% for item, value in itemslist.iteritems %}
+                            {{item}}-{{value}} ,
+                        {% endfor %}<br/>
+                Status : {{status}}<br/>
+                Thank you for using <a href="/" style="text-decoration: none;color: orange;">KAIZING</a> services.
+                {% endif %}
+              </span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

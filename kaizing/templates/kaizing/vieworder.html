@@ -1,0 +1,26 @@
+{% extends 'kaizing/admin_base.html' %}
+{% load index %}
+{% block content %}
+    <div class="panel panel-info">
+        <div class="panel-heading"><h3>View Order</h3>	</div>
+        <div class="panel-body">
+            <p><b>Name:</b> {{order.name}}</p>
+            <p><b>Phone: </b>{{order.phone}}</p>
+            <p><b>Delivery Address:</b> {{order.delivery_address}}</p>
+            <p><b>Order Total:</b> {{order.order_total}}</p>
+            <p><b>Order Status: </b>{{order.order_state}}</p>
+            <p><b>Date: </b>{{order.created}}</p>
+            <p><b> Last Modified: </b>{{order.modified}}</p>
+            <p> <b> Items:</b> {% for item, value in itemslist.iteritems %}
+                {{item}}-{{value}} ,<!--<p> order.items.name | index:forloop.counter0}} X order.items.quantity | index:forloop.counter0}}</p>-->
+                {% endfor %}<br>
+            <a href="{% url 'kaizing:acknowledgeorder' vendor.pk order.pk %}"><button type="button" class="btn btn-sm btn-danger">Acknowledge</button></a>
+
+            <a href="{% url 'kaizing:dispatchorder' vendor.pk order.pk %}"><button type="button" class="btn btn-sm btn-danger">Dispatch</button></a>
+
+            <a href="{% url 'kaizing:completeorder' vendor.pk order.pk %}"><button type="button" class="btn btn-sm btn-success">Complete</button></a>
+            <br><br>
+             <a href="{% url 'kaizing:index' vendor.pk %}"><button type="button" class="btn btn-primary bg-cadet-blue">Back</button></a>
+        </div>
+    </div>
+{% endblock %}

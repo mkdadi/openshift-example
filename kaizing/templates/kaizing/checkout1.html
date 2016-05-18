@@ -1,0 +1,304 @@
+<header>
+	<div class="ui top attached demo menu custom-menu">
+		<a class="" href="/">
+			<div class="logodiv"></div>
+		</a>
+
+	</div>
+	<div class="header-text lato">
+		<div class="ui breadcrumb">
+			<a class="section" href="/">{{location_name}}</a>
+			<i class="right chevron icon divider"></i>
+			<a class="section" href="/app/#/locations/{{location_id}}/{{menutypeCheckout}}">{{menutypeCheckout}}</a>
+			<i class="right chevron icon divider"></i>
+			<div class="active section">Checkout</div>
+		</div>
+	</div>
+</header>
+
+<!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'kaizing/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'kaizing/css/semantic.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'kaizing/css/responsive_style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'kaizing/css/style.css' %}" />
+
+    <script type="text/javascript" src="/static/kaizing/js/angular.min.js"></script>
+    <script type="text/javascript" src="/static/kaizing/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/kaizing/js/semantic.min.js" ></script>
+    <script type="text/javascript" src="/static/kaizing/js/common.js" ></script>
+    <script type="text/javascript" src="/static/kaizing/js/google_maps.js" ></script>
+    <script type="text/javascript" src="/static/kaizing/js/jquery.cookie.js" ></script>
+
+<div class="width-90 margin80-auto">
+
+
+<div class="clear"></div>
+<div ng-show = "!LOADING" class="inline-div">
+
+
+ <!-- DETAILS SECTION -->
+ <form name = 'createForm' method="POST" action="" class="ui form" onsubmit="getvalues()">{% csrf_token %}
+ 	<input type="hidden" id="items" name="items">
+ 	<input type="hidden" id="source" name="source" value="web">
+ 	<input type="hidden" id="set" name="set" value="order">
+ 	<input type="hidden" id="category" name="category" value="{{is_snacks}}">
+
+ 	<input type="hidden" id="payment_mode" name="payment_mode" value="{{payment_mode}}">
+ 	<div class="ui column centered row">
+ 		<div class = 'menu-div offset-m3 col m7 s12 l12 offset-m3'>
+ 			<div class="ui  center aligned segment">
+ 				<div class="centerdivUser">
+
+ 					<h4 class="ui horizontal divider header"><i class="user icon"></i>USER DETAILS</h4>
+
+
+ 					<div id="completeform" class="ui form" ng-show="detailFields">
+ 						<div class="two fields">
+ 							<div class="field">
+ 								<div class="ui left icon input action">
+ 									<input type="text"  placeholder="Enter Name" name='name' pattern = '[a-zA-Z0-9. ]+'>
+ 									<i class="user icon"></i>
+ 								</div>
+ 							</div>
+ 							<div class="field">
+ 								<div class="ui left icon input action">
+ 									<input type="text" placeholder="Enter Phone number" ng-model="userData.phone" name = 'phone' maxlength="10" ng-keypress="coupon={};originalPrice();" onkeypress="return isNumber(event);" ng-class = '{"negative":userData.phone[0]=="0" || userData.phone.length < 10}'>
+ 									<i class="phone icon">+91</i>
+ 								</div>
+					      </div>
+					    </div>
+					    <div class="two fields">
+					    	<div class="field">
+					    		<div class="ui left icon input action">
+					    			<input type="email" name="email" placeholder="Enter Email ID" ng-model="userData.email" overwrite-email>
+					    			<i class="mail icon"></i>
+					    		</div>
+
+					    	</div>
+					    	<div class="field">
+					    		<select class="ui dropdown" name = 'timeslot' ng-model="selected_time_slot" ng-options = 'slot for slot in time_slots' ng-change="timeslot_ change();" required>
+					    			<option value="">Select time slot</option>
+									{% for slot in slots %}
+									<option value="{{slot.pk}}">{{slot.start_time}} -- {{slot.end_time}}</option>
+									{% endfor %}
+					    		</select> 	 
+					    		
+					    	</div>
+					    </div>
+					
+					    
+
+					    	<!-- Dropdown Trigger -->
+  						<select name="location" style="width: auto;">
+						  <!-- Dropdown Structure -->
+							<option value="0">Select Location</option>
+							  {% for location in locations %}
+						    <option value="{{location.id}}">&nbsp;{{location.name}}</option>
+							  {% endfor %}
+						</select>
+					
+						
+						</div>
+					</div>
+					<!-- ends -->
+				</div>
+				<!-- </div> -->
+			</div>
+			<div class="clear"></div>
+		</div>
+
+		<!-- cart div -->
+		<div class="ui  center aligned segment cart-div row" ng-show = "!LOADING">
+		<div class="">
+			<h4 class="ui horizontal divider header">
+				<i class="shop icon"></i>
+				CART
+			</h4>
+			<div class="" ng-show="cart.length">
+				<table class="ui table cartTable custom-scroll">
+					<tbody class="">
+					<script type="text/javascript">
+					var cart=sessionStorage.getItem('cart');
+					var vendor_id = sessionStorage.getItem('vendor_id');
+					var itemsList = [{% for item in items %}"{{item.name}}",{%endfor%}];
+					var prices = [{% for item in items %} "{{item.price}}", {%endfor%}];
+					var alldelivery = [{% for item in items %} "{{item.delivery_charge}}", {%endfor%}];
+					var price=0;
+					var vendors=[{% for vendor_ in allvendors %} "{{vendor_.id}}","{{vendor_.tax}}", {% endfor %}];
+					var tax=0;
+					for(var i=0;i<vendors.length;i+=2)
+					{
+						if(vendors[i]==vendor_id)
+						{
+							tax=vendors[i+1];
+						}
+					}
+					tax = parseInt(tax);
+					var total=0;
+					var delivery=0;
+					var sum=0;
+					for(var i=0;i<cart.length;i+=2)
+					{
+						document.write("<tr ng-repeat='cartItem in cart'>");
+						for(var j=0;j<itemsList.length;j++)
+						{
+						if(j+1 == parseInt(cart[i],10))
+						{
+							document.write("<td id="+j+">"+itemsList[j]+"</td>");
+							price=parseInt(prices[j],10);
+							sum+=price;
+							delivery+=parseInt(alldelivery[j],10);
+							break;
+						}
+						}
+							document.write('<td><a class="" ng-click="removeItemfromcart(cartItem);">'+
+							'<i class="remove icon red"></i></a>'+
+								'</td>'+
+								'<td ng-bind="cartItem.name" style="width: 20%;"></td>'+
+								'<td><span class="rupeesymbol">₹</span>'+ price+'</td>'+
+								'<td>'+
+									'<a class="" ng-click="subtractItemfromcart(cartItem);">'+
+										'<i class="minus square icon graycolor cartcounter"></i></a>'+
+										'<span class="" ng-bind="cartItem.counter" style=""></span>'+
+										'<a class="" ng-click="addItemtocart(cartItem);">'+
+											'<i class="add square icon graycolor cartcounter"></i></a>'+
+										'</td>'+
+									'</tr>');
+									}
+								total=sum+delivery+sum/100.0*tax;
+								function getsum(){
+								return sum;
+								}
+								function getvalues(){
+								c=document.getElementById('cart');
+								c.setAttribute("value",cart);
+								x=document.getElementById('vendor');
+								x.setAttribute("value",vendor_id);
+								y=document.getElementById('total');
+								y.setAttribute("value",total);
+								}
+								function getdelivery(){
+								return delivery;
+								}
+								function gettotal(){
+								return total;
+								}
+								function gettax(){
+								return sum/100.0*tax;
+								}
+								</script>
+								</tbody>
+							</table>
+							<div class="field">
+								<div class="ui action input">
+									<input class="coupon" type="text"  placeholder="Enter Coupon Code" ng-model="coupon.couponCode" ng-class="{'blurred': coupon.couponStatus==1, 'negative': (coupon.couponStatus==0)}" ng-keypress="checkPhoneNumber()" ng-disabled="coupon.couponStatus" >
+									<input type="hidden" name="coupon" ng-model="coupon.couponCode" value="{{coupon.couponCode}}">
+									<div type="submit" class="ui red button" ng-click = "applyCoupon()" ng-class='{"disabled": (!(coupon.couponCode && userData.phone.length==10)),"loading": miniloadingCoupon}' ng-show="!coupon.couponStatus">Apply</div>
+									<div type="submit" class="ui red button" ng-click = "coupon=[];coupon.couponStatus=0" ng-show="coupon.couponStatus">Edit</div>
+								</div>
+								<!-- <div class="layeroncoupon"><p>Applicable from Tomorrow!</p></div> -->
+								<p class="coupunstatus" ng-class="{'positivehint': coupon.couponStatus, 'hint': !coupon.couponStatus}" ng-bind="coupon.couponStatusMsg"></p>
+							</div>
+						</div>
+						<script>
+						if(getsum()==0){
+							document.write('<div ng-show="!cart.length" class="font24 margin-top-50"><h2>Cart is Empty.</h2></div>');
+						}
+						</script>
+
+						<h4 class="ui horizontal divider" ng-show="cart.length">
+							Sum = <span class="rupeesymbol">₹</span> <script>document.write(getsum());</script>
+						</h4>
+						<h4 class="ui horizontal divider" ng-show="cart.length">
+							Delivery = <span class="rupeesymbol">₹</span> <script>document.write(getdelivery());</script>
+						</h4>
+						<h4 class="ui horizontal divider" ng-show="cart.length">
+							Tax = <span class="rupeesymbol">₹</span> <script>document.write(gettax());</script>
+						</h4>
+						<h4 class="ui horizontal divider" ng-show="cart.length">
+							Total = <span class="rupeesymbol">₹</span> <script>document.write(gettotal());</script>
+						</h4>
+
+						 
+		<button class="ui red button large font24 margin-top-10 margin-bottom-10"  ng-show="cart.length" ng-class="{'disabled': !(userData.username && userData.phone && userData.email && userData.address && selected_time_slot), 'loading':miniloading}" ng-disabled="disableButton">
+			Send Me My Meal
+		</button>
+	
+		</div>
+	</div>
+</div>
+	<input type="hidden" name="cart" id="cart"/>
+	<input type="hidden" name="total" id="total"/>
+	<input type="hidden" name="vendor" id="vendor"/>
+
+</form>
+</div>
+</div>
+<div class="ui modal small" id="orderModal">
+	<div class="header">
+		Order Status
+	</div>
+	<div class="content">
+		<div class="description">
+			<div class="ui header" id="errorMsg"></div>      
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+		// Loading for page load
+		$(window).on('load', function() {
+			$('.cart-modal').modal('hide');
+			$(".cover#mainloading").fadeOut(200);
+			activateCustomScroll();
+		});
+		function newW() {
+			$(window).load();
+		}
+		setTimeout(newW, 200);
+
+		$(window).ready(function() {
+			$('#staticDiv').hide();
+			$('.ui.dropdown').dropdown(); 
+		})
+
+	</script>
+	<script type="text/javascript"> 
+		$('.ui.radio.checkbox').checkbox();
+	// $(".nano").nanoScroller();
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.js"></script>
+<style type="text/css">
+	.padding20{padding:0 20px}
+	.hint{text-align:left!important;padding-top:10px;color:#db2d29}
+	a.hint:hover{color:rgba(255,0,0,0.5)}
+	.positivehint{text-align:left!important;padding-top:10px;color:#5bbd72}
+	.custom-menu{height:60px;position:absolute}
+	.logodiv{height:46px;left:0!important;position:absolute!important;top:7px!important;width:200px}
+	.desktop-nav{top:10px!important}
+	i.phone{top:14px!important;font-size:15px!important}
+	.layeroncoupon{background:rgba(0,0,0,0.1) none repeat scroll 0 0;height:83px;position:absolute;top:240px;width:92%;z-index:999}
+	.layeroncoupon > p{font-size:20px;font-weight:700;margin-top:57px}
+	#verifyphone{margin:100px}
+	#editPhone .icon.pencil{margin:5px 3px!important}
+	input.coupon{text-transform:uppercase}
+	.ui.action.input{width:100%!important}
+	.ui.action.input input{width:87%!important}
+	i.icon.phone::before {
+    content: "" !important;
+}
+	.blurred{background-color:#f2f4d1!important;border:medium none!important;color:#df886b!important}
+	@media screen and (max-width: 560px) {
+		.desktop-nav{top:60px!important}
+		.logodiv{width:185px}
+		#verifyphone{margin:80px 0}
+	}
+	.ui.segment{padding:0!important}
+</style>
+

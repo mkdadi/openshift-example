@@ -1,0 +1,48 @@
+{% extends 'kaizing/admin_base.html' %}
+
+{% block content %}
+
+    <div>{{message}}</div>
+
+    <form method="post" action="" class="bg-white">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            <div class="form_errors">
+                {% for err in form.non_field_errors %}
+                    <div class="form_error_message">{{ err }}</div>
+                {% endfor %}
+            </div>
+        
+        {% endif %}
+
+        {% if form.errors %}
+            <p class="bg-danger text-danger" style="padding:1em; font-size:16px;">
+                There is an error in this form.
+            </p>
+        {% endif %}
+
+        {% for field in form %}
+            {% if field.type == "HiddenField" or field.name == "csrf_token" %}
+                {{ field }}
+            {% else %}
+                <div class="form-row {% if field.errors %} field-error {% endif %} clearfix">
+                    <div class="clearfix">{{ field.label_tag }}</div>
+                    <div>{{ field }}</div>
+                    {% for err in field.errors %}
+
+                        <p class="bg-danger" style="padding:0.5em; font-size:16px;">
+                            <span class="error_message text-danger">{{ err }}</span>
+                        </p>
+
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <div class="form-row clearfix">
+            <button class="btn btn-primary bg-green disable-on-click mright" type="submit">Login</button>
+        </div>
+    </form>
+
+{% endblock %}

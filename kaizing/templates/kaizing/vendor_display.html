@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>Kaizing | Choose Vendor</title>
+	<!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'kaizing/css/semantic.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'kaizing/css/new_style.css' %}">
+<script type="text/javascript" src="/static/kaizing/js/jquery.min.js" ></script>
+<script type="text/javascript" src="/static/kaizing/js/semantic.min.js" ></script>
+<link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400,400italic,600,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+<!-- 
+ <div class="slider fullscreen" style="z-index: -100;">
+  <ul class="slides">
+    <li>
+      <img src="https://unsplash.imgix.net/photo-1414924347000-9823c338079b?q=75&fm=jpg&s=0fa6db3cdc65e50c111575043fad4b5c"> 
+      <div class="caption center-align">
+        <h3></h3>
+        <h5 class="light grey-text text-lighten-3"></h5>
+      </div>
+    </li>
+    <li>
+      <img src="https://ununsplash.imgix.net/photo-1414849424631-8b18529a81ca?q=75&fm=jpg&s=0e993004a2f3704e8f2ad5469315ccb7"> 
+      <div class="caption left-align">
+        <h3></h3>
+        <h5 class="light grey-text text-lighten-3"></h5>
+      </div>
+    </li>
+    <li>
+      <img src="https://ununsplash.imgix.net/uploads/1413259835094dcdeb9d3/6e609595?q=75&fm=jpg&s=6a4fc66161293fc4a43a6ca6f073d1c5"> 
+      <div class="caption right-align">
+        <h3></h3>
+        <h5 class="light grey-text text-lighten-3"></h5>
+      </div>
+    </li>
+  </ul>
+</div> -->
+<!-- ====================================contact-modal========================================-->
+  <div id="contact" class="modal">
+    <div class="modal-content">
+    	<a class="modal-close right" id="contact_close">&#10060;</a>
+    	<h4 class="align-center">Contact Us</h4>
+    	<div class="row">
+    	 	<div class="col s6">
+    	 		<div class="align-center">
+			 <div class="contact-details">
+    		
+    			<h5>Random_Swag</h5>
+    			<i class="material-icons con">phone_iphone</i>+91-9093873050 <br>
+				<i class="material-icons con">email</i>stud.iitkgp@gmail.com
+  			</div>
+      	</div>
+    	 	</div>
+    	 	<div class="col s6">
+    	 		<div class="align-center">
+			 <div class="contact-details">
+    			<h5>Mkdadi</h5>
+    			<i class="material-icons con">phone_iphone</i>+91-9002496369 <br>
+				<i class="material-icons con">email</i>swag.iitkgp@gmail.com
+  			</div>
+      	</div>
+    	 	</div>
+    	 </div>
+    </div>
+  </div>
+<!-- ====================================contact-modal========================================-->
+<!-- Dropdown Trigger -->
+<div class="row align-center">
+  <a class='dropdown-button btn col s4 m4 l2' href='#' data-activates='dropdown1'>HELP BOX</a>
+
+  <!-- Dropdown Structure -->
+  <ul id='dropdown1' class='dropdown-content'>
+    <li><a data-target="contact" class="modal-trigger">Contact us</a></li>
+    <li><a href="/kaizing/orderstatus/">Track Order</a></li>
+  </ul>
+ </div>
+ <div class="row">
+ <div class="offset-s4 col s6">
+<div class="align-center back">
+<div class="back_in">
+<p style="font-size:1.5em;">I am <span class='bluecolor'>hungry</span> to eat from : </p>
+	<div class="ui selection dropdown">
+		<input id='selector' type="hidden" name="country" onchange="console.log()">
+		<i class="dropdown icon"></i>
+		<div class="default text">Select Restaurant </div>
+		<div id='vendorselector' class="menu">
+		{% for vendor in vendors %}
+			<option id='vendor{{vendor.pk}}' class="item optionvalue" {% if vendor.is_open == True %}style="color: green;"{% else %}style="color: red;"{% endif %} onclick="$('#nextbutton').removeClass('hide')" value='{{vendor.pk}}'><i id='{{vendor.pk}}' class=""></i>{{vendor.name}}</option>
+		{% endfor %}
+		</div>
+	</div>
+
+	<button id ="nextbutton" class="ui hide  green labeled icon button" style="float:left;background-color: #9FC97C!important" onclick="menuPage();">
+  <i class="right arrow icon"></i>
+  Menu
+</button>
+</div>
+</div>
+</div>
+</div>
+
+<div id="firstsection" class = 'hide' style="margin-left:15%;margin-top:5%; width:65%; height:90%">
+	<header id="tableheader" style="text-align:center; font-size:1.8em">
+		<div class="column" style="width:20%;float:left;">
+			<p><span class='bluecolor'>Genre</span></p>
+		</div>
+		<div class="column" style="width:20%;float:left;text-align:left">
+			<p><span class='bluecolor'>Name</span></p>
+		</div>
+		<div class="column" style="width:20%;float:left	">
+			<p><span class='bluecolor'>Price</span></p>
+		</div>
+		<div class="column" style="width:20%;float:left	">
+			<p><span class='bluecolor'>Avail</span></p>
+		</div>
+		<div class="column" style="width:20%;float:left	">
+			<p><span class='bluecolor'>Add</span></p>
+		</div>
+	</header>
+
+	<div class="content" style="font-size:1.5em">
+		<div class="column" style="width:20%;text-align:center;float:left">
+			{% for genre in genres %}
+			<div class="row hide " style="display:hidden!important;">
+				<p class='genre genre{{genre.pk}}' id='genre{{genre.pk}}'>{{genre.name}}</p>
+			</div>
+			{% endfor %}
+		</div>
+		<div class="column" style="width:20%; float:left ">
+			{% for item in items %}	
+			<div class="row hide">
+				<p>{{item.name}}</p>
+			</div>
+			{% endfor %}
+		</div>
+		<div class="column" style="width:20%; float:left; text-align:center">
+			{% for item in items %}	
+			<div class="row hide">
+				<p>₹{{item.price}}</p>
+			</div>
+			{% endfor %}
+		</div>
+		<div class="column" style="width:20%; float:left; text-align:center">
+			{% for item in items %}	
+			<div class="row hide">
+				<p>{{item.num}}</p>
+			</div>
+			{% endfor %}
+		</div>
+		<div class="column" style="width:20%; float:left;text-align:center">
+			{% for item in items %}	
+			<div class="row hide">
+				<p><span style="border:2px ; cursor:pointer;display:inline-block" onclick="document.querySelector('#itemno{{item.pk}}').innerHTML--">-</span><span id='itemno{{item.pk}}' style="margin-left:10%"> 0 </span> <span style="border:2px ;border-radius:5px; cursor:pointer; display:inline-block;display:inline-block" onclick="document.querySelector('#itemno{{item.pk}}').innerHTML++">+</span></p>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$('.ui.dropdown').dropdown();
+	function menuPage(){
+	    	var value = document.getElementById('vendorselector');
+	    	var len = value.childElementCount;
+	    	var vendorid = 0;
+	    	for(i=1;i<=len;i++){
+	    		if ($('#vendor'+i).hasClass('active selected')){vendorid=i}
+	    	};
+	    	window.location.href = '../menu/'+vendorid;
+	}
+	function displaygenre(vendorno){
+		$('.genre').each(function(){
+			console.log(vendorno);
+			var a={{vendors.0}};
+			console.log(a[0]);
+		});
+	}
+	$('#nextbutton').click(function(){
+
+	});
+	$('.dropdown-button').dropdown({
+      inDuration: 300,
+      outDuration: 225,
+      constrain_width: false, // Does not change width of dropdown to that of the activator
+      hover: true, // Activate on hover
+      gutter: 0, // Spacing from edge
+      belowOrigin: false, // Displays dropdown below the button
+      alignment: 'left' // Displays dropdown with edge aligned to the left of button
+    }
+  );
+	$(document).ready(function(){
+      $('.slider').slider({full_width: true});
+    });
+    $(document).ready(function(){
+    $('.modal-trigger').leanModal();
+  });
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.js"></script>
+</body>
+</html>

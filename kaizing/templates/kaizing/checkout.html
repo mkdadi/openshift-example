@@ -1,0 +1,247 @@
+<!-- CSS  -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'kaizing/css/bootstrap.min.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'kaizing/css/semantic.min.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'kaizing/css/responsive_style.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'kaizing/css/style.css' %}" />
+
+<script type="text/javascript" src="/static/kaizing/js/angular.min.js"></script>
+<script type="text/javascript" src="/static/kaizing/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/kaizing/js/semantic.min.js" ></script>
+<script type="text/javascript" src="/static/kaizing/js/common.js" ></script>
+<script type="text/javascript" src="/static/kaizing/js/google_maps.js" ></script>
+<script type="text/javascript" src="/static/kaizing/js/jquery.cookie.js" ></script>
+
+<!-- form   -->
+<nav>
+  <div class="nav-wrapper teal lighten-2" >
+    <a href="#" class="brand-logo">&nbsp;Checkout</a>
+  </div>
+</nav>
+
+<br>
+<div class="container">
+
+  <div class="row">
+    <form name ="createForm" method="POST" action="" id ="myform" onsubmit="return getvalues()"class="col s12">{% csrf_token %}
+      <div class="row"><h2 class="align-center"><i class="user icon"></i>USER DETAILS</h4></div>
+<div class="row">
+  <div class="input-field col s6">
+    <i class="material-icons prefix">account_circle</i>
+    <input placeholder="Name" type="text" name='name' pattern = '[a-zA-Z0-9. ]+' class="active validate" required="required">
+    <label for="name">Name</label>
+  </div>
+  <div class="input-field col s6">
+    <input placeholder="Email" id="email" name="email" type="email" class="validate" required="required">
+    <label for="email">Email</label>
+  </div>
+</div>
+<div class="row">
+  <div class="input-field col s6">
+    <select name="timeslot" required="required">
+      <option value="">Select time slot</option>
+      {% for slot in slots %}
+      <option value="{{slot.pk}}">{{slot.start_time}} -- {{slot.end_time}}</option>
+      {% endfor %}
+    </select>
+    <label>Time-Slot</label>
+  </div>
+  <div class="input-field col s6">
+    <i class="material-icons prefix">phone</i>
+    <input id="icon_telephone"  name="phone" type="text" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required class="validate">
+    <label for="icon_telephone">Mobile</label>
+  </div>
+</div>
+<div class="row">
+  <div class="input-field col s12">
+    <select required name="location">
+      <option value="">Select Location</option>
+      {% for location in locations %}
+      <option value="{{location.id}}">&nbsp;{{location.name}}</option>
+      {% endfor %}
+    </select>
+    <label>Location</label>
+  </div>
+
+</div>
+
+
+<div class="row col s12">
+  <div class="col s12 m6">
+    <div class="card blue-grey darken-1">
+      <div class="card-content white-text center-align">
+        <span class="card-title">CART</span>
+	<table class="ui table cartTable custom-scroll">
+	  <tbody>
+	    <script type="text/javascript">
+	      var cart=sessionStorage.getItem('cart');
+	      var vendor_id = sessionStorage.getItem('vendor_id');
+		  sessionStorage.clear();
+	      var itemsList = [{% for item in items %}"{{item.name}}",{%endfor%}];
+	      var prices = [{% for item in items %} "{{item.price}}", {%endfor%}];
+	      var alldelivery = [{% for item in items %} "{{item.delivery_charge}}", {%endfor%}];
+	      var price=0;
+	      var vendors=[{% for vendor_ in allvendors %} "{{vendor_.id}}","{{vendor_.tax}}", {% endfor %}];
+	      var tax=0;
+	      for(var i=0;i<vendors.length;i+=2)
+			{
+			  if(vendors[i]==vendor_id)
+			    {
+			      tax=vendors[i+1];
+			    }
+	        }
+			tax = parseInt(tax);
+			var total=0;
+			var delivery=0;
+			var sum=0;
+	        var added=0;
+	        var cartitemslist=[];
+			for(var i=0;i<cart.length;i+=2)
+			  {
+				for(var j=0;j<itemsList.length;j++)
+				  {
+					if(j+1 == parseInt(cart[i],10))
+					  {
+						added=0;
+						for(var k=0;k<cartitemslist.length;k++)
+						  {
+							if (cartitemslist[k].key==j+1) {
+							  cartitemslist[k].value+=1;
+							  added=1;
+							  break;
+							}
+						  }
+						  if (added==0) {
+							cartitemslist.push({key: j+1,
+							value: 1});
+						  }
+						  break;
+					  }
+				  }
+			  }
+									      
+			  document.write('<tr><td>Item Name</td><td style="width: 20%;"></td><td>Qty</td><td></td><td>Price</td></tr>');
+			  for(var i=0;i<cartitemslist.length;i++)
+				{
+				  document.write("<tr ng-repeat='cartItem in cart'>");
+				  for(var j=0;j<itemsList.length;j++)
+					{
+					  if(j+1 == parseInt(cartitemslist[i].key,10))
+						{
+						  document.write("<td id="+j+">"+itemsList[j]+"</td>");
+						  price=parseInt(prices[j],10);
+						  sum+=price*cartitemslist[i].value;
+						  delivery+=parseInt(alldelivery[j],10)*cartitemslist[i].value;
+						  break;
+						}
+					}
+				  document.write(
+					'<td ng-bind="cartItem.name" style="width: 20%;"></td>'+
+					'<td>'+ cartitemslist[i].value+'</td>'+
+					'<td></td>'+
+					'<td><span class="rupeesymbol">₹</span>'+ price+'</td>'+
+					'</tr>');
+				}
+			  total=sum+delivery+sum/100.0*tax;
+			  function getsum(){
+				return sum;
+			  }
+			  function getvalues(){
+				c=document.getElementById('cart');
+				c.setAttribute("value",cart);
+				x=document.getElementById('vendor');
+				x.setAttribute("value",vendor_id);
+				y=document.getElementById('total');
+				y.setAttribute("value",total);
+				if (parseInt(sum)==0) {
+				  alert("You don't have any items in your cart!");
+                    return false;
+                }
+				return phonenumber(document.createForm.phone);
+			  }
+			  function getdelivery(){
+				return delivery;
+			  }
+			  function gettotal(){
+				return total;
+			  }
+			  function gettax(){
+				return sum/100.0*tax;
+			  }
+		</script>
+	  </tbody>
+	</table>
+	<script>
+	  if(getsum()==0){
+	  document.write('<div ng-show="!cart.length" class="font24 margin-top-50"><h2>Cart is Empty.</h2></div>');
+	  }
+	</script>
+        <h4 class="ui horizontal divider" ng-show="cart.length">
+	  <br/>
+	  Sum = <span class="rupeesymbol">₹</span> <script>document.write(getsum());</script>
+	  <br/><br/>
+	  Delivery = <span class="rupeesymbol">₹</span> <script>document.write(getdelivery());</script>
+	  <br/><br/>
+	  Tax = <span class="rupeesymbol">₹</span> <script>document.write(gettax());</script>
+	  <br/><br/>
+	  Total = <span class="rupeesymbol">₹</span> <script>document.write(gettotal());</script>
+	  <br/><br/>
+	</h4>
+
+      </div>
+      <div class="card-action center-align">
+        <button class="btn waves-effect waves-light" type="submit">Send Me My Meal
+    	  <i class="material-icons right">send</i>
+  	</button>
+      </div>
+    </div>
+  </div>
+</div>
+<input type="hidden" name="cart" id="cart"/>
+<input type="hidden" name="total" id="total"/>
+<input type="hidden" name="vendor" id="vendor"/>
+</form> 
+<!-- end of form -->
+</div>
+<script type="text/javascript">
+  // Loading for page load
+  $(window).on('load', function() {
+  $('.cart-modal').modal('hide');
+  $(".cover#mainloading").fadeOut(200);
+  activateCustomScroll();
+  });
+  function newW() {
+  $(window).load();
+  }
+  setTimeout(newW, 200);
+
+  $(window).ready(function() {
+  $('#staticDiv').hide();
+  $('.ui.dropdown').dropdown(); 
+  })
+  $(document).ready(function() {
+  $('select').material_select();
+  });
+  function phonenumber(inputtxt)  
+  {  
+  var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;  
+  if(inputtxt.value.match(phoneno))  
+  {  
+  return true;  
+  }  
+  else 
+  {  
+  alert("Not a valid Phone Number");  
+  return false;
+  }  }
+
+
+</script>
+<script type="text/javascript"> 
+  $('.ui.radio.checkbox').checkbox();
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.js"></script>

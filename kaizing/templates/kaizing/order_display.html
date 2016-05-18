@@ -1,0 +1,88 @@
+{% extends 'kaizing/admin_base.html' %}
+
+{% block page_css %}
+
+{%  endblock %}
+
+
+{%  block page_bottom_js %}
+    <script type="text/javascript" src="/static/kaizing/js/jquery.dataTables.min.js" ></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#js_locations_d_table").dataTable({
+                "aaSorting": [[0,'asc']],
+                "iDisplayLength": 25,
+                "bPaginate": true,
+                "sPaginationType": "full_numbers",
+                "columnDefs": [{
+                    "targets": [2,3,4],
+                    "bSortable": true,
+                    "class": 'w15'
+                },{
+                    "targets": 0,
+                    "class": 'w15'
+                },{
+                    "targets": 1,
+                    "class": 'w15',
+                    "bSortable": true
+                }]
+            });
+        });
+    </script>
+
+{%  endblock %}
+
+
+{% block content %}
+
+    <div>{{message}}</div>
+
+
+
+{% if vendor.is_authenticated %}
+
+    <div class="pad dtable-cont">
+        <table id="js_locations_d_table" class="dtable">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Time</th>
+                <th>Order State</th>
+                <th>Total</th>
+                <th>View</th>
+                <th>Cancel</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for order in orders %}
+                <tr>
+                    <td>{{order.name}}</td>
+                    <td>{{order.phone}}</td>
+                    <td>{{order.created}}</td>
+                    <td>{{order.order_state}}</td>
+                    <td>{{order.order_total}}</td>
+                    <td><a href="{% url 'kaizing:vieworder' vendor.id order.pk %}">
+                            <button class="btn btn-sm btn-success">View</button>
+                        </a></td>
+                        <td>
+                    {% if order.cancancelorder %}
+                    <a href="{% url 'kaizing:cancelorder' vendor.id order.pk %}">
+                            <button class="btn btn-sm btn-danger">Cancel</button>
+                    </a>
+                    {% else %}
+                        <p> Not Valid</p>
+                    {% endif %}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% else %}
+<h1> Think you are smart? We are smarter </h1>
+{% endif %}
+
+{% endblock %}
