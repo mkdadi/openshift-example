@@ -171,7 +171,7 @@ def menudisplay(request, vendor_id):
     for genre in genres:
         arr2 = []
         for item in genre.item.all():
-            arr2.append(item.pk)
+            arr2.append(int(item.pk))
         arr1.append(arr2)
         
     items = Item.objects.all()
