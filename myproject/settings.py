@@ -37,7 +37,7 @@ else:
     
 DATABASES = {}
 if 'OPENSHIFT_MYSQL_DB_URL' in os.environ:
-    url = urlparse.urlparse('mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/')
+    url = urlparse.urlparse(os.environ.get('OPENSHIFT_POSTGRESQL_DB_URL'))
 
     DATABASES['default'] = {
         'ENGINE' : 'django.db.backends.mysql',
