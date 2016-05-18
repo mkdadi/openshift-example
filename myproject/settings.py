@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import urlparse
 DJ_PROJECT_DIR = os.path.dirname(__file__)
 BASE_DIR = os.path.dirname(DJ_PROJECT_DIR)
 
@@ -31,8 +32,8 @@ if ON_OPENSHIFT:
     DEBUG = True
     ALLOWED_HOSTS = ['*']
 else:
-    DEBUG = False
-    ALLOWED_HOSTS = ['*']
+    DEBUG = True
+    ALLOWED_HOSTS = []
     
 DATABASES = {}
 if 'OPENSHIFT_MYSQL_DB_URL' in os.environ:
