@@ -10,7 +10,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-import urlparse
+
 DJ_PROJECT_DIR = os.path.dirname(__file__)
 BASE_DIR = os.path.dirname(DJ_PROJECT_DIR)
 
@@ -37,15 +37,14 @@ else:
     
 DATABASES = {}
 if 'OPENSHIFT_MYSQL_DB_URL' in os.environ:
-    url = urlparse.urlparse(os.environ.get('OPENSHIFT_POSTGRESQL_DB_URL'))
 
     DATABASES['default'] = {
         'ENGINE' : 'django.db.backends.mysql',
         'NAME': 'kaizing',
         'USER': 'adminZQwMGEY',
         'PASSWORD': 'iR5pUyqJghql',
-        'HOST': url.hostname,
-        'PORT': url.port,
+        'HOST': os.environ.get('OPENSHIFT_MYSQL_DB_HOST'),
+        'PORT': os.environ.get('OPENSHIFT_MYSQL_DB_PORT'),
         }
 else:
     DATABASES['default'] = {
