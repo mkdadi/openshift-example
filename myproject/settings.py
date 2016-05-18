@@ -29,7 +29,7 @@ SESSION_COOKIE_AGE = 5 * 60 #
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if ON_OPENSHIFT:
-    DEBUG = True
+    DEBUG = False
     ALLOWED_HOSTS = ['*']
 else:
     DEBUG = True
