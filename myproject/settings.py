@@ -30,29 +30,44 @@ SESSION_COOKIE_AGE = 5 * 60 #
 if ON_OPENSHIFT:
     DEBUG = True
     ALLOWED_HOSTS = ['*']
-    DATABASES = {
-        'default':{
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': 'db.sqlite3',
-            'USER': '',
-            'PASSWORD': '',
-            'HOST' : '',
-            'PORT' : ''
-        }
-    }
 else:
-    DEBUG = True
-    ALLOWED_HOSTS = []
-    DATABASES = {
-        'default':{
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': 'db.sqlite3',
-            'USER': '',#os.getenv('OPENSHIFT_SQLITE_DB_USERNAME'),
-            'PASSWORD': '',#os.getenv('OPENSHIFT_SQLITE_DB_PASSWORD'),
-            'HOST': '',#os.getenv('OPENSHIFT_SQLITE_DB_HOST'),
-            'PORT': '',#os.getenv('OPENSHIFT_SQLITE_DB_PORT'),
+    DEBUG = False
+    ALLOWED_HOSTS = ['*']
+    
+DATABASES = {}
+if 'OPENSHIFT_MYSQL_DB_URL' in os.environ:
+    url = urlparse.urlparse(os.environ.get('OPENSHIFT_MYSQL_DB_URL'))
+
+    DATABASES['default'] = {
+        'ENGINE' : 'django.db.backends.mysql',
+        'NAME': os.environ['kaizing'],
+        'USER': url.username,
+        'PASSWORD': url.password,
+        'HOST': url.hostname,
+        'PORT': url.port,
         }
-    }
+
+elif 'OPENSHIFT_POSTGRESQL_DB_URL' in os.environ:
+    url = urlparse.urlparse(os.environ.get('OPENSHIFT_POSTGRESQL_DB_URL'))
+
+    DATABASES['default'] = {
+        'ENGINE' : 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ['kaizing'],
+        'USER': url.username,
+        'PASSWORD': url.password,
+        'HOST': url.hostname,
+        'PORT': url.port,
+        }
+
+else:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
+        }
 
 TEMPLATES = [
     {
