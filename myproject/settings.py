@@ -87,7 +87,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.template',
-    'kaizing'
+    'kaizing',
 )
 
 MIDDLEWARE_CLASSES = (
